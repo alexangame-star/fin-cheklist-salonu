@@ -306,7 +306,7 @@ html,body{background:var(--navy);color:var(--text);font-family:"Jost",sans-serif
     btn.textContent = 'Надсилаємо…';
 
     var data = {
-      source:     pTool ? 'Beauty Маніфест анкета (' + pTool + ')' : 'Beauty Маніфест анкета',
+      source: new URLSearchParams(window.location.search).get('source') || '—',
       name:       name,
       phone:      phone,
       telegram:   tg,
