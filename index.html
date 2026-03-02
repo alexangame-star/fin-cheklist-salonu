@@ -164,6 +164,38 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <option value="від 1 000 000 грн">Від 1 000 000 грн</option>
       </select>
     </div>
+    <div class="field">
+      <label>Місто</label>
+      <select id="city">
+        <option value="">— Оберіть —</option>
+        <option value="Київ">Київ</option>
+        <option value="Харків">Харків</option>
+        <option value="Одеса">Одеса</option>
+        <option value="Дніпро">Дніпро</option>
+        <option value="Запоріжжя">Запоріжжя</option>
+        <option value="Львів">Львів</option>
+        <option value="Вінниця">Вінниця</option>
+        <option value="Полтава">Полтава</option>
+        <option value="Черкаси">Черкаси</option>
+        <option value="Суми">Суми</option>
+        <option value="Інше місто">Інше місто</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Тип салону</label>
+      <select id="salon_type">
+        <option value="">— Оберіть —</option>
+        <option value="Нейл-студія">Нейл-студія 💅</option>
+        <option value="Перукарня">Перукарня 💇</option>
+        <option value="Барбершоп">Барбершоп 🪒</option>
+        <option value="Косметологія">Косметологія ✨</option>
+        <option value="Подологія">Подологія 🦶</option>
+        <option value="Лазерна епіляція">Лазерна епіляція ⚡</option>
+        <option value="Масаж / SPA">Масаж / SPA 🤲</option>
+        <option value="Комплексний салон">Комплексний салон 💎</option>
+        <option value="Повний спектр">Повний спектр 🏛️</option>
+      </select>
+    </div>
     <button class="btn" onclick="goStep(2)">ПОЧАТИ ЧЕКЛІСТ →</button>
   </div>
 </div>
@@ -314,6 +346,8 @@ async function submitAndShow(){
   const noCount=answers.filter(a=>a===false).length;
   const rev=document.getElementById('revenue').value;
   const role=document.getElementById('role').value;
+  const city=document.getElementById('city').value;
+  const stype=document.getElementById('salon_type').value;
   const tg=document.getElementById('f_tg').value.trim()||'—';
   const noQuestions=answers.map((a,i)=>!a?QUESTIONS[i]:null).filter(Boolean);
   const levelCode=score>=13?'high':score>=6?'mid':'low';
@@ -324,6 +358,7 @@ async function submitAndShow(){
     source:'checklist_data',
     name, phone, telegram:tg,
     role, revenue:rev,
+    city, salon_type:stype,
     score: score+'/15',
     level: levelLabel,
     yes_count: score,
@@ -331,7 +366,7 @@ async function submitAndShow(){
     weak_areas: noQuestions.slice(0,5).join(' | ')
   });
 
-  window._leadData={name,phone,tg,role,rev};
+  window._leadData={name,phone,tg,role,rev,city,stype};
   showResult(score,rev,role);
   goStep(4);
 }
@@ -414,7 +449,9 @@ function openManifest(){
     tg:d.tg||'',
     role:d.role||'',
     rev:d.rev||'',
-    source:'checklist_data'
+    city:d.city||'',
+    type:d.stype||'',
+    source:'Фін чеклист'
   });
   window.open('https://alexangame-star.github.io/admin-calculator/beauty-manifest-anketa.html?'+params.toString(),'_blank');
 }
