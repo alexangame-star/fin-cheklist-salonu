@@ -239,6 +239,7 @@ html,body{background:var(--navy);color:var(--text);font-family:"Jost",sans-serif
   var pRev   = params.get('rev')     || '';
   var pCity  = params.get('city')    || '';
   var pType  = params.get('type')    || '';
+  var pTool  = params.get('source')  || '';
 
   // Заповнюємо поля
   if (pName)  document.getElementById('fName').value  = pName;
@@ -305,7 +306,7 @@ html,body{background:var(--navy);color:var(--text);font-family:"Jost",sans-serif
     btn.textContent = 'Надсилаємо…';
 
     var data = {
-      source:     'Beauty Маніфест анкета',
+      source:     pTool ? 'Beauty Маніфест анкета (' + pTool + ')' : 'Beauty Маніфест анкета',
       name:       name,
       phone:      phone,
       telegram:   tg,
